@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学术成绩系统</title>
+<style>
+    body { font-family: "Segoe UI", sans-serif; background-color: #f4f7f6; color: #333; padding: 40px; }
+    .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 40px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f8f9fa; }
+    .analysis-section { background-color: #eaf2f8; padding: 20px; border-left: 5px solid #3498db; margin-top: 20px;}
+    .update-btn { background-color: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>个人学术成绩看板</h1>
+    
+    <h2>已录入成绩</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>科目</th>
+                <th>日期</th>
+                <th>分数</th>
+                <th>满分</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in grades %}
+            <tr>
+                <td>{{ item.subject }}</td>
+                <td>{{ item.date }}</td>
+                <td><strong>{{ item.score }}</strong></td>
+                <td>{{ item.maxScore }}</td>
+            </tr>
+            {% endendfor %}
+        </tbody>
+    </table>
+
+    <h2>Gemini 学情分析报告</h2>
+    <form method="POST">
+        <button type="submit" class="update-btn">向 Gemini 请求最新分析</button>
+    </form>
+    
+    <div class="analysis-section">
+        <div>{{ analysis | safe }}</div>
+    </div>
+</div>
+
+</body>
+</html>
